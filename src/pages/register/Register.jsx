@@ -3,6 +3,13 @@ import React from "react";
 import registerAnimation from "../../assets/lotties/register.json";
 
 const Register = () => {
+    const handleSignIn = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.email.value;
+        console.log(email,password)
+    }
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -16,7 +23,7 @@ const Register = () => {
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body">
             <h1 className="text-5xl font-bold">SignUp Now!</h1>
-            <form>
+            <form onSubmit={handleSignIn}>
               <fieldset className="fieldset">
                 <label className="label">Email</label>
                 <input type="email" className="input" placeholder="Email" name="email"/>
