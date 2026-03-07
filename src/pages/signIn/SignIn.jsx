@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import loginAnimation from "../../assets/lotties/Login.json"
 
 const SignIn = () => {
-  const { createUser } = use(AuthContext);
+  const { signInUser } = use(AuthContext);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -13,7 +13,7 @@ const SignIn = () => {
     const password = form.email.value;
     console.log(email, password);
 
-    createUser(email, password)
+    signInUser(email, password)
       .then((result) => {
         console.log(result.user);
       })
