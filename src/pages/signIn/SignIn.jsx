@@ -1,7 +1,8 @@
 import React, { use } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import Lottie from "lottie-react";
-import loginAnimation from "../../assets/lotties/Login.json"
+import loginAnimation from "../../assets/lotties/Login.json";
+import SocialLogin from "../shared/SocialLogin";
 
 const SignIn = () => {
   const { signInUser } = use(AuthContext);
@@ -10,7 +11,7 @@ const SignIn = () => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
-    const password = form.email.value;
+    const password = form.password.value;
     console.log(email, password);
 
     signInUser(email, password)
@@ -56,6 +57,8 @@ const SignIn = () => {
                 <button className="btn btn-neutral mt-4">Login</button>
               </fieldset>
             </form>
+            <hr className="my-3"></hr>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
