@@ -1,4 +1,3 @@
-import React, { use } from "react";
 import { MdLocationPin } from "react-icons/md";
 import { NavLink } from "react-router";
 
@@ -9,14 +8,12 @@ const JobCard = ({ job }) => {
     company_logo,
     company,
     location,
-    jobType,
-    category,
     description,
     salaryRange,
     requirements,
   } = job;
   return (
-    <div className="card bg-base-100 w-96 shadow-sm border-1">
+    <div className="card bg-base-100 w-96 shadow-sm border border-cyan-600">
       <div className="flex gap-2">
         <figure className="w-16">
           <img src={company_logo} alt="Shoes" />
@@ -38,7 +35,7 @@ const JobCard = ({ job }) => {
                 requirements.map((req, index) => <div key={index} className="badge badge-outline">{req}</div>)
             }
         </div>
-        <NavLink to={`jobs/${_id}`} className="btn btn-primary">Details</NavLink>
+        <div className="flex justify-end mt-2"><NavLink to={`jobs/${_id}`} className="btn btn-primary w-1/2">Details</NavLink></div>
       </div>
     </div>
   );

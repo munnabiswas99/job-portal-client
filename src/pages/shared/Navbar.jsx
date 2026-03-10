@@ -20,6 +20,11 @@ const Navbar = () => {
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
+      {
+        user && <> 
+        <NavLink to={"/myApplications"} className="flex items-center">MyApplications</NavLink>
+        </>
+      }
     </>
   );
 
