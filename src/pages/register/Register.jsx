@@ -10,7 +10,7 @@ const Register = () => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
-        const password = form.email.value;
+        const password = form.password.value;
         console.log(email,password)
 
         createUser(email, password)
@@ -48,7 +48,7 @@ const Register = () => {
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
-                <button className="btn btn-neutral mt-4">Login</button>
+                <button className="btn btn-neutral mt-4">SignUp</button>
               </fieldset>
             </form>
           </div>
