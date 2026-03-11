@@ -25,6 +25,11 @@ const Navbar = () => {
         <NavLink to={"/myApplications"} className="flex items-center">MyApplications</NavLink>
         </>
       }
+      {
+        user && <> 
+        <NavLink to={"/addJob"} className="flex items-center mx-2">AddJob</NavLink>
+        </>
+      }
     </>
   );
 
