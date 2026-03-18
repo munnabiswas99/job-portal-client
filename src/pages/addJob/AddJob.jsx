@@ -35,7 +35,7 @@ const AddJob = () => {
       .post("http://localhost:3000/jobs", newJob)
       .then((res) => {
         if (res.data.insertedId) {
-          Swal.fire({
+          Swal .fire({
             position: "top-end",
             icon: "success",
             title: "Your work has been saved",
