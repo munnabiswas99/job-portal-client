@@ -28,6 +28,7 @@ const Navbar = () => {
       {
         user && <> 
         <NavLink to={"/addJob"} className="flex items-center mx-2">AddJob</NavLink>
+        <NavLink to={"/myPostedJobs"} className="flex items-center mx-2">MyJobs</NavLink>
         </>
       }
     </>
