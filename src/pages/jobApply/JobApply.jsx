@@ -25,6 +25,7 @@ const JobApply = () => {
       github,
       portfolio,
       resume,
+      status:'pending'
     };
 
     axios
