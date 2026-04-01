@@ -34,7 +34,7 @@ const AuthProvider = ({children}) => {
             setLoading(false);
             if(currentUser?.email){
                 const userData = {email: currentUser.email};
-                axios.post('http://localhost:3000/jwt', userData, {
+                axios.post('https://job-portal-server-three-sepia.vercel.app/jwt', userData, {
                     withCredentials: true
                 })
                 .then(() => {

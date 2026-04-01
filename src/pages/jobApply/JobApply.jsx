@@ -30,7 +30,7 @@ const JobApply = () => {
     };
 
     axios
-      .post("http://localhost:3000/applications", application)
+      .post("https://job-portal-server-three-sepia.vercel.app/applications", application)
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

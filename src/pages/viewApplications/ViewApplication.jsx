@@ -11,7 +11,7 @@ const ViewApplication = () => {
     const status = e.target.value;
 
     axios
-      .patch(`http://localhost:3000/applications/${applicationId}`, { status })
+      .patch(`https://job-portal-server-three-sepia.vercel.app/applications/${applicationId}`, { status })
       .then((res) => {
         if (res.data.modifiedCount) {
           Swal.fire({

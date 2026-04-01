@@ -2,15 +2,14 @@ import { motion } from "framer-motion";
 import React from "react";
 import team1 from "../../assets/team/team1.jpg";
 import team2 from "../../assets/team/team2.jpg";
+import { NavLink } from "react-router";
 
 const Banner = () => {
   return (
     <div className="hero min-h-screen bg-base-200 px-4 overflow-hidden">
       <div className="hero-content flex-col lg:flex-row-reverse gap-12">
-
         {/* IMAGE SECTION */}
         <div className="flex-1 flex flex-col sm:flex-row lg:flex-col items-center justify-center gap-8">
-
           <motion.img
             src={team1}
             initial={{ opacity: 0, x: 80 }}
@@ -42,7 +41,6 @@ const Banner = () => {
 
         {/* TEXT SECTION */}
         <div className="flex-1 text-center lg:text-left">
-
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -61,17 +59,19 @@ const Banner = () => {
             transition={{ delay: 0.3 }}
             className="py-6 text-sm sm:text-base opacity-80 max-w-lg"
           >
-            Discover thousands of job opportunities from top companies.
-            Build your career and connect with employers worldwide.
+            Discover thousands of job opportunities from top companies. Build
+            your career and connect with employers worldwide.
           </motion.p>
 
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="btn btn-primary rounded-full px-8 shadow-lg"
-          >
-            Get Started
-          </motion.button>
+          <NavLink to="/register">
+            <motion.button
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn btn-primary rounded-full px-8 shadow-lg"
+            >
+              Get Started
+            </motion.button>
+          </NavLink>
         </div>
       </div>
     </div>

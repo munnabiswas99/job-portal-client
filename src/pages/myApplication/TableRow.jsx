@@ -2,9 +2,44 @@ import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaTrash } from "react-icons/fa";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const TableRow = ({ application, index }) => {
-  const { jobId, title, company, company_logo, jobType, location } = application;
+const TableRow = ({ application, index, remainingApplications, setApplications }) => {
+  const { _id, jobId, title, company, company_logo, jobType, location } =
+    application;
+
+const handleDelete = () => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "This application will be removed!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      axios
+        .delete(`https://job-portal-server-three-sepia.vercel.app/application/${_id}`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire("Deleted!", "Application removed.", "success");
+
+            const remaining = remainingApplications.filter(
+              (app) => app._id !== _id
+            );
+
+            setApplications(remaining);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
+};
 
   return (
     <motion.tr
@@ -35,7 +70,6 @@ const TableRow = ({ application, index }) => {
       {/* Job */}
       <td>
         <div className="font-medium">{title}</div>
-
         <span className="badge badge-outline badge-primary mt-1">
           {jobType}
         </span>
@@ -50,7 +84,10 @@ const TableRow = ({ application, index }) => {
           </button>
         </Link>
 
-        <button className="btn btn-sm btn-error btn-outline gap-2">
+        <button
+          onClick={handleDelete}
+          className="btn btn-sm btn-error btn-outline gap-2"
+        >
           <FaTrash />
           Remove
         </button>

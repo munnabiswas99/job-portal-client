@@ -3,7 +3,7 @@ import Banner from "./Banner";
 import HotJobs from "./HotJobs";
 
 const Home = () => {
-  const jobsPromise = fetch("http://localhost:3000/jobs").then((res) =>
+  const jobsPromise = fetch("https://job-portal-server-three-sepia.vercel.app/jobs").then((res) =>
     res.json(),
   );
   return (

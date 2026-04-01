@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         path: "/jobs/:id",
         Component: JobDetails,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/jobs/${params.id}`),
+          fetch(`https://job-portal-server-three-sepia.vercel.app/jobs/${params.id}`),
       },
       {
         path: '/jobApply/:id',
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       {
         path: 'applications/:job_id',
         element: <PrivateRoutes><ViewApplication></ViewApplication></PrivateRoutes>,
-        loader: ({params}) => fetch(`http://localhost:3000/applications/job/${params.job_id}`)
+        loader: ({params}) => fetch(`https://job-portal-server-three-sepia.vercel.app/applications/job/${params.job_id}`)
       }
 
     ],
