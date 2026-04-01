@@ -55,15 +55,17 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar sticky top-0 z-50 bg-base-100/80 backdrop-blur border-b border-base-300 px-4">
+    <div className="navbar sticky top-0 z-50 bg-base-100/80 backdrop-blur border-b border-base-300 px-4 lg:px-8 max-w-7xl mx-auto">
 
-      {/* Left */}
+      {/* LEFT */}
       <div className="navbar-start">
+
+        {/* Mobile Menu */}
         <div className="dropdown">
           <div tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -79,48 +81,65 @@ const Navbar = () => {
 
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 p-3 shadow bg-base-100 rounded-box w-60"
           >
             {links}
           </ul>
         </div>
 
-        <NavLink to="/" className="text-xl font-bold text-primary">
+        {/* Logo */}
+        <NavLink to="/" className="text-lg md:text-xl font-bold text-primary">
           JobPortal
         </NavLink>
       </div>
 
-      {/* Center */}
+      {/* CENTER (Desktop Menu) */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-2">{links}</ul>
       </div>
 
-      {/* Right */}
+      {/* RIGHT */}
       <div className="navbar-end gap-2">
+
         {user ? (
           <>
-            <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
+            {/* Avatar */}
+            <div className="tooltip tooltip-bottom" data-tip={user?.displayName || "User"}>
               <div className="avatar">
-                <div className="w-9 rounded-full">
-                  <img src={user?.photoURL} alt="user" />
+                <div className="w-9 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <img
+                    src={
+                      user?.photoURL ||
+                      "https://i.ibb.co/4pDNDk1/avatar.png"
+                    }
+                    alt="user"
+                  />
                 </div>
               </div>
             </div>
 
+            {/* Sign Out */}
             <button
-              className="btn btn-primary btn-sm rounded-full"
+              className="btn btn-primary btn-sm rounded-full px-4"
               onClick={handleSignOut}
             >
-              Sign Out
+              <span className="hidden sm:inline">Sign Out</span>
+              <span className="sm:hidden">↪</span>
             </button>
           </>
         ) : (
           <>
-            <NavLink className="btn btn-outline btn-primary btn-sm" to="/register">
+            <NavLink
+              className="btn btn-outline btn-primary btn-sm"
+              to="/register"
+            >
               Register
             </NavLink>
 
-            <NavLink className="btn btn-primary btn-sm" to="/signIn">
+            <NavLink
+              className="btn btn-primary btn-sm"
+              to="/signIn"
+            >
               Sign In
             </NavLink>
           </>

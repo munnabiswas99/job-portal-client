@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
-import { useLoaderData } from "react-router";
+import { FaExternalLinkAlt } from "react-icons/fa";
+import { Link, useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 
 const ViewApplication = () => {
@@ -49,7 +50,10 @@ const ViewApplication = () => {
             <tr>
               <th>#</th>
               <th>Applicant</th>
-              <th>Job Title</th>
+              <th>Resume</th>
+              <th>Github</th>
+              <th>linkedIn</th>
+              <th>Portfolio</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -62,17 +66,23 @@ const ViewApplication = () => {
               >
                 <th>{index + 1}</th>
 
-                {/* Applicant */}
                 <td className="font-medium">
                   {application.applicant}
                 </td>
 
-                {/* Job */}
                 <td className="opacity-80">
-                  {application.jobTitle || "Job Position"}
+                  <Link to={`${application.resume}`}><FaExternalLinkAlt /></Link>
+                </td>
+                <td className="opacity-80">
+                  <Link to={`${application.github}`}><FaExternalLinkAlt /></Link>
+                </td>
+                <td className="opacity-80">
+                  <Link to={`${application.linkedIn}`}><FaExternalLinkAlt /></Link>
+                </td>
+                <td className="opacity-80">
+                  <Link to={`${application.portfolio}`}><FaExternalLinkAlt /></Link>
                 </td>
 
-                {/* Status */}
                 <td>
                   <select
                     defaultValue={application.status}
