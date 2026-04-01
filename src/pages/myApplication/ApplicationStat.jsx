@@ -1,62 +1,54 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { FaBriefcase, FaFileAlt, FaUserCheck } from "react-icons/fa";
 
 const ApplicationStat = () => {
+  const stats = [
+    {
+      title: "Jobs Applied",
+      value: "24",
+      desc: "Applications submitted",
+      icon: <FaFileAlt size={28} />,
+      color: "text-primary",
+    },
+    {
+      title: "Interviews",
+      value: "8",
+      desc: "Scheduled interviews",
+      icon: <FaUserCheck size={28} />,
+      color: "text-secondary",
+    },
+    {
+      title: "Active Jobs",
+      value: "12",
+      desc: "Currently open positions",
+      icon: <FaBriefcase size={28} />,
+      color: "text-accent",
+    },
+  ];
+
   return (
-    <div className="stats shadow">
-      <div className="stat">
-        <div className="stat-figure text-primary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-8 w-8 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            ></path>
-          </svg>
-        </div>
-        <div className="stat-title">Total Likes</div>
-        <div className="stat-value text-primary">25.6K</div>
-        <div className="stat-desc">21% more than last month</div>
-      </div>
+    <div className="grid gap-6 md:grid-cols-3 max-w-6xl mx-auto">
 
-      <div className="stat">
-        <div className="stat-figure text-secondary">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            className="inline-block h-8 w-8 stroke-current"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 10V3L4 14h7v7l9-11h-7z"
-            ></path>
-          </svg>
-        </div>
-        <div className="stat-title">Page Views</div>
-        <div className="stat-value text-secondary">2.6M</div>
-        <div className="stat-desc">21% more than last month</div>
-      </div>
-
-      <div className="stat">
-        <div className="stat-figure text-secondary">
-          <div className="avatar avatar-online">
-            <div className="w-16 rounded-full">
-              <img src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp" />
-            </div>
+      {stats.map((stat, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+          className="bg-base-100 shadow-lg border border-base-300 rounded-xl p-6"
+        >
+          <div className="flex justify-between items-center mb-4">
+            <div className={`${stat.color}`}>{stat.icon}</div>
           </div>
-        </div>
-        <div className="stat-value">86%</div>
-        <div className="stat-title">Tasks done</div>
-        <div className="stat-desc text-secondary">31 tasks remaining</div>
-      </div>
+
+          <div className="text-3xl font-bold">{stat.value}</div>
+          <div className="text-lg font-medium">{stat.title}</div>
+          <p className="text-sm opacity-70">{stat.desc}</p>
+        </motion.div>
+      ))}
+      
     </div>
   );
 };

@@ -8,12 +8,12 @@ const SocialLogin = ({from}) => {
 
   const handleSocialLogin = () => {
     googleSignIn()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         navigate(from || '/')
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
   return (

@@ -16,15 +16,15 @@ const SignIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
 
     signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         navigate(from)
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
   return (

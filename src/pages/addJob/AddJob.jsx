@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
 import Swal from "sweetalert2";
 
 const AddJob = () => {
@@ -15,189 +15,100 @@ const AddJob = () => {
       jobType: form.jobType.value,
       applicationDeadline: form.applicationDeadline.value,
       salaryRange: {
-        min: parseInt(form.minSalary.value),
-        max: parseInt(form.maxSalary.value),
+        min: Number(form.minSalary.value) || 0,
+        max: Number(form.maxSalary.value) || 0,
         currency: form.currency.value,
       },
       description: form.description.value,
-      requirements: form.requirements.value.split(",").map((req) => req.trim()),
+      requirements: form.requirements.value
+        .split(",")
+        .map((req) => req.trim())
+        .filter(Boolean),
       responsibilities: form.responsibilities.value
         .split(",")
-        .map((res) => res.trim()),
+        .map((res) => res.trim())
+        .filter(Boolean),
       status: form.status.value,
       hr_email: form.hr_email.value,
       hr_name: form.hr_name.value,
       company_logo: form.company_logo.value,
     };
 
-    console.log(newJob);
     axios
       .post("http://localhost:3000/jobs", newJob)
       .then((res) => {
         if (res.data.insertedId) {
-          Swal .fire({
+          Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Your work has been saved",
+            title: "Job posted successfully",
             showConfirmButton: false,
             timer: 1500,
           });
+          form.reset();
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => alert(error.message));
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6 shadow-xl rounded-xl">
+    <div className="max-w-5xl mx-auto p-8 bg-base-100 shadow-xl rounded-xl">
       <h1 className="text-3xl font-bold text-center mb-8">Add New Job</h1>
 
       <form onSubmit={handleAddJob} className="space-y-8">
+
         {/* Basic Info */}
         <fieldset className="border p-6 rounded-lg">
           <legend className="text-lg font-semibold px-2">Basic Info</legend>
-
           <div className="grid md:grid-cols-2 gap-5">
-            <input
-              type="text"
-              name="title"
-              placeholder="Job Title"
-              className="input input-bordered w-full"
-              required
-            />
-
-            <input
-              type="text"
-              name="company"
-              placeholder="Company Name"
-              className="input input-bordered w-full"
-              required
-            />
-
-            <input
-              type="text"
-              name="location"
-              placeholder="Location"
-              className="input input-bordered w-full"
-              required
-            />
-
-            <input
-              type="text"
-              name="category"
-              placeholder="Category (Engineering, Design...)"
-              className="input input-bordered w-full"
-            />
-
+            <input type="text" name="title" placeholder="Job Title" className="input input-bordered w-full" required />
+            <input type="text" name="company" placeholder="Company Name" className="input input-bordered w-full" required />
+            <input type="text" name="location" placeholder="Location" className="input input-bordered w-full" required />
+            <input type="text" name="category" placeholder="Category (Engineering, Design...)" className="input input-bordered w-full" />
             <select name="jobType" className="select select-bordered w-full">
               <option value="Onsite">Onsite</option>
               <option value="Remote">Remote</option>
               <option value="Hybrid">Hybrid</option>
             </select>
-
-            <input
-              type="date"
-              name="applicationDeadline"
-              className="input input-bordered w-full"
-            />
+            <input type="date" name="applicationDeadline" className="input input-bordered w-full" />
           </div>
         </fieldset>
 
         {/* Salary */}
         <fieldset className="border p-6 rounded-lg">
           <legend className="text-lg font-semibold px-2">Salary Range</legend>
-
           <div className="grid md:grid-cols-3 gap-5">
-            <input
-              type="number"
-              name="minSalary"
-              placeholder="Minimum Salary"
-              className="input input-bordered w-full"
-            />
-
-            <input
-              type="number"
-              name="maxSalary"
-              placeholder="Maximum Salary"
-              className="input input-bordered w-full"
-            />
-
-            <input
-              type="text"
-              name="currency"
-              placeholder="Currency (BDT)"
-              defaultValue="BDT"
-              className="input input-bordered w-full"
-            />
+            <input type="number" name="minSalary" placeholder="Minimum Salary" className="input input-bordered w-full" />
+            <input type="number" name="maxSalary" placeholder="Maximum Salary" className="input input-bordered w-full" />
+            <input type="text" name="currency" placeholder="Currency (BDT)" defaultValue="BDT" className="input input-bordered w-full" />
           </div>
         </fieldset>
 
         {/* Job Details */}
         <fieldset className="border p-6 rounded-lg">
           <legend className="text-lg font-semibold px-2">Job Details</legend>
-
           <div className="space-y-4">
-            <textarea
-              name="description"
-              placeholder="Job Description"
-              className="textarea textarea-bordered w-full h-32"
-            ></textarea>
-
-            <input
-              type="text"
-              name="requirements"
-              placeholder="Requirements (comma separated)"
-              className="input input-bordered w-full"
-            />
-
-            <input
-              type="text"
-              name="responsibilities"
-              placeholder="Responsibilities (comma separated)"
-              className="input input-bordered w-full"
-            />
+            <textarea name="description" placeholder="Job Description" className="textarea textarea-bordered w-full h-32"></textarea>
+            <input type="text" name="requirements" placeholder="Requirements (comma separated)" className="input input-bordered w-full" />
+            <input type="text" name="responsibilities" placeholder="Responsibilities (comma separated)" className="input input-bordered w-full" />
           </div>
         </fieldset>
 
         {/* HR Info */}
         <fieldset className="border p-6 rounded-lg">
           <legend className="text-lg font-semibold px-2">HR Information</legend>
-
           <div className="grid md:grid-cols-2 gap-5">
-            <input
-              type="text"
-              name="hr_name"
-              placeholder="HR Name"
-              className="input input-bordered w-full"
-            />
-
-            <input
-              type="email"
-              name="hr_email"
-              placeholder="HR Email"
-              className="input input-bordered w-full"
-            />
+            <input type="text" name="hr_name" placeholder="HR Name" className="input input-bordered w-full" />
+            <input type="email" name="hr_email" placeholder="HR Email" className="input input-bordered w-full" />
           </div>
         </fieldset>
 
-        {/* Company */}
+        {/* Company Info */}
         <fieldset className="border p-6 rounded-lg">
           <legend className="text-lg font-semibold px-2">Company Info</legend>
-
           <div className="grid md:grid-cols-2 gap-5">
-            <input
-              type="text"
-              name="company_logo"
-              placeholder="Company Logo URL"
-              className="input input-bordered w-full"
-            />
-
-            <select
-              name="status"
-              className="select select-bordered w-full"
-              defaultValue="active"
-            >
+            <input type="text" name="company_logo" placeholder="Company Logo URL" className="input input-bordered w-full" />
+            <select name="status" className="select select-bordered w-full" defaultValue="active">
               <option value="active">Active</option>
               <option value="closed">Closed</option>
             </select>
